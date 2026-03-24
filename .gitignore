@@ -1,0 +1,37 @@
+# Maven target directory
+/target/
+
+# Spring Boot logs
+*.log
+logs/
+spring.log
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Environment / credentials
+application.properties
+application.yml
+*.env
+
+# Backup files
+*.bak
+*.tmp
+
+# Node (if ever used for tooling)
+node_modules/
