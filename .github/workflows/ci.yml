@@ -1,0 +1,48 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: HamburgerButtons5858
+          MYSQL_DATABASE: flightdb
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+    - name: Make Maven wrapper executable
+      run: chmod +x ./mvnw
+    - name: Wait for MySQL
+      run: |
+        until mysqladmin ping -h 127.0.0.1 -uroot -pHamburgerButtons5858 --silent; do
+          sleep 2
+        done
+    - name: Build with Maven
+      run: ./mvnw clean package -DskipTests
+    - name: Run tests
+      run: ./mvnw test
+      env:
+        SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/flightdb?createDatabaseIfNotExist=true
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: HamburgerButtons5858

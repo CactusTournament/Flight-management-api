@@ -22,7 +22,7 @@ public class CityService {
 
     public City findById(Long id) {
         return cityRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("City not found"));
+            .orElseThrow(() -> new com.sprint.flightapi.exception.NotFoundException("City not found"));
     }
 
     public City save(City city) {

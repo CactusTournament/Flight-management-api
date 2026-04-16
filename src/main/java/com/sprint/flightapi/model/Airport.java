@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,4 +39,16 @@ public class Airport {
     @ManyToMany(mappedBy = "airports")
     @JsonIgnore
     private List<Aircraft> aircraft;
+
+    @OneToMany(mappedBy = "airport")
+    @JsonIgnore
+    private List<Gate> gates;
+
+    @OneToMany(mappedBy = "originAirport")
+    @JsonIgnore
+    private List<Flight> departingFlights;
+
+    @OneToMany(mappedBy = "destinationAirport")
+    @JsonIgnore
+    private List<Flight> arrivingFlights;
 }
