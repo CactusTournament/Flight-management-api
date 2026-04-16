@@ -37,12 +37,15 @@ public class Passenger {
     @JsonIgnore
     private City city;
 
-    @ManyToMany
-    @JoinTable(
+        @ManyToMany
+        @JoinTable(
             name = "passenger_aircraft",
             joinColumns = @JoinColumn(name = "passenger_id"),
             inverseJoinColumns = @JoinColumn(name = "aircraft_id")
-    )
-    @JsonIgnore
-    private List<Aircraft> aircraft;
+        )
+        @JsonIgnore
+        private List<Aircraft> aircraft;
+
+        @ManyToMany(mappedBy = "passengers")
+        private List<Flight> flights;
 }

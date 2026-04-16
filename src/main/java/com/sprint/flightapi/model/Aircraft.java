@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -47,5 +49,12 @@ public class Aircraft {
             inverseJoinColumns = @JoinColumn(name = "airport_id")
     )
     @JsonIgnore
-    private List<Airport> airports;
+        private List<Airport> airports;
+
+        @ManyToOne
+        @JoinColumn(name = "airline_id")
+        private Airline airline;
+
+        @OneToMany(mappedBy = "aircraft")
+        private List<Flight> flights;
 }

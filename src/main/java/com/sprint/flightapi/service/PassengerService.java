@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.sprint.flightapi.exception.NotFoundException;
 import com.sprint.flightapi.model.Aircraft;
 import com.sprint.flightapi.model.Airport;
 import com.sprint.flightapi.model.Passenger;
@@ -21,9 +22,10 @@ public class PassengerService {
         return passengerRepository.findAll();
     }
 
+
     public Passenger findById(Long id) {
         return passengerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Passenger not found"));
+                .orElseThrow(() -> new NotFoundException("Passenger not found with id: " + id));
     }
 
     public Passenger save(Passenger passenger) {

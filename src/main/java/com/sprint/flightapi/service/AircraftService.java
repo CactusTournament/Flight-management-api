@@ -22,7 +22,7 @@ public class AircraftService {
 
     public Aircraft findById(Long id) {
         return aircraftRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft not found"));
+            .orElseThrow(() -> new com.sprint.flightapi.exception.NotFoundException("Aircraft not found"));
     }
 
     public Aircraft save(Aircraft aircraft) {

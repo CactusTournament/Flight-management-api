@@ -33,4 +33,8 @@ public class City {
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Airport> airports;
+
+    @OneToMany(mappedBy = "city")
+    @JsonIgnore
+    private List<Passenger> passengers;
 }

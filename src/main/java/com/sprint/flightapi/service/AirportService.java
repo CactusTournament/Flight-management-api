@@ -21,7 +21,7 @@ public class AirportService {
 
     public Airport findById(Long id) {
         return airportRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Airport not found"));
+            .orElseThrow(() -> new com.sprint.flightapi.exception.NotFoundException("Airport not found"));
     }
 
     public Airport save(Airport airport) {
