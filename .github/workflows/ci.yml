@@ -31,6 +31,8 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '21'
+    - name: Make Maven wrapper executable
+      run: chmod +x ./mvnw
     - name: Wait for MySQL
       run: |
         until mysqladmin ping -h 127.0.0.1 -uroot -pHamburgerButtons5858 --silent; do
