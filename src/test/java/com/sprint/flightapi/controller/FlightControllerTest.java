@@ -1,3 +1,4 @@
+
 package com.sprint.flightapi.controller;
 
 import java.util.Arrays;
@@ -41,6 +42,22 @@ class FlightControllerTest {
         Flight flight = new Flight();
         when(flightService.findById(1L)).thenReturn(flight);
         mockMvc.perform(get("/flights/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testGetArrivals() throws Exception {
+        List<Flight> flights = Arrays.asList(new Flight());
+        when(flightService.findArrivalsByAirport(3L)).thenReturn(flights);
+        mockMvc.perform(get("/flights/arrivals/3"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testGetDepartures() throws Exception {
+        List<Flight> flights = Arrays.asList(new Flight());
+        when(flightService.findDeparturesByAirport(1L)).thenReturn(flights);
+        mockMvc.perform(get("/flights/departures/1"))
                 .andExpect(status().isOk());
     }
 }

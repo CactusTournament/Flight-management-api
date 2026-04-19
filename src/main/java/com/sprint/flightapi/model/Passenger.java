@@ -32,6 +32,11 @@ public class Passenger {
     private String lastName;
     private String phoneNumber;
 
+    private String username;
+    private String email;
+    private String password;
+    private String role; // e.g., USER or ADMIN
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     @JsonIgnore
@@ -46,6 +51,7 @@ public class Passenger {
         @JsonIgnore
         private List<Aircraft> aircraft;
 
-        @ManyToMany(mappedBy = "passengers")
-        private List<Flight> flights;
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    @ManyToMany(mappedBy = "passengers")
+    private List<Flight> flights;
 }

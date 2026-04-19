@@ -1,3 +1,4 @@
+
 package com.sprint.flightapi.service;
 
 import java.util.Arrays;
@@ -38,5 +39,19 @@ class FlightServiceTest {
         Flight flight = new Flight();
         when(flightRepository.findById(1L)).thenReturn(Optional.of(flight));
         assertEquals(flight, flightService.findById(1L));
+    }
+
+    @Test
+    void testFindArrivalsByAirport() {
+        List<Flight> flights = Arrays.asList(new Flight());
+        when(flightRepository.findByDestinationAirportId(3L)).thenReturn(flights);
+        assertEquals(flights, flightService.findArrivalsByAirport(3L));
+    }
+
+    @Test
+    void testFindDeparturesByAirport() {
+        List<Flight> flights = Arrays.asList(new Flight());
+        when(flightRepository.findByOriginAirportId(1L)).thenReturn(flights);
+        assertEquals(flights, flightService.findDeparturesByAirport(1L));
     }
 }

@@ -16,8 +16,17 @@ public class FlightService {
         this.flightRepository = flightRepository;
     }
 
+
     public List<Flight> findAll() {
         return flightRepository.findAll();
+    }
+
+    public List<Flight> findArrivalsByAirport(Long airportId) {
+        return flightRepository.findByDestinationAirportId(airportId);
+    }
+
+    public List<Flight> findDeparturesByAirport(Long airportId) {
+        return flightRepository.findByOriginAirportId(airportId);
     }
 
 

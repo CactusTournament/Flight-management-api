@@ -44,11 +44,11 @@ public class Airport {
     @JsonIgnore
     private List<Gate> gates;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "originAirport")
-    @JsonIgnore
-    private List<Flight> departingFlights;
+    private List<Flight> departures;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "destinationAirport")
-    @JsonIgnore
-    private List<Flight> arrivingFlights;
+    private List<Flight> arrivals;
 }
