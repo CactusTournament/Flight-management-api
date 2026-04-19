@@ -22,6 +22,7 @@ public class Gate {
     @JoinColumn(name = "airport_id")
     private Airport airport;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "gate")
     private List<Flight> flights;
 

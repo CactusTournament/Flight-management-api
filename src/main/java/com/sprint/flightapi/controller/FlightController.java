@@ -22,9 +22,22 @@ import lombok.RequiredArgsConstructor;
 public class FlightController {
     private final FlightService flightService;
 
+
     @GetMapping
     public List<Flight> findAll() {
         return flightService.findAll();
+    }
+
+    // Arrivals for a given airport
+    @GetMapping("/arrivals/{airportId}")
+    public List<Flight> getArrivals(@PathVariable Long airportId) {
+        return flightService.findArrivalsByAirport(airportId);
+    }
+
+    // Departures for a given airport
+    @GetMapping("/departures/{airportId}")
+    public List<Flight> getDepartures(@PathVariable Long airportId) {
+        return flightService.findDeparturesByAirport(airportId);
     }
 
     @GetMapping("/{id}")

@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Flight {
@@ -18,26 +20,33 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 2, max = 10)
     private String flightNumber;
 
     @ManyToOne
     @JoinColumn(name = "aircraft_id")
+    @NotNull
     private Aircraft aircraft;
 
     @ManyToOne
     @JoinColumn(name = "airline_id")
+    @NotNull
     private Airline airline;
 
     @ManyToOne
     @JoinColumn(name = "gate_id")
+    @NotNull
     private Gate gate;
 
     @ManyToOne
     @JoinColumn(name = "origin_airport_id")
+    @NotNull
     private Airport originAirport;
 
     @ManyToOne
     @JoinColumn(name = "destination_airport_id")
+    @NotNull
     private Airport destinationAirport;
 
     @ManyToMany
@@ -48,7 +57,10 @@ public class Flight {
     )
     private List<Passenger> passengers;
 
+    @NotNull
     private LocalDateTime departureTime;
+
+    @NotNull
     private LocalDateTime arrivalTime;
 
     // Getters and setters

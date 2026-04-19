@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.http.ResponseEntity;
 
 import com.sprint.flightapi.model.Aircraft;
 import com.sprint.flightapi.model.Airport;
 import com.sprint.flightapi.model.Passenger;
 import com.sprint.flightapi.service.PassengerService;
+import com.sprint.flightapi.dto.SignupRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +27,25 @@ import lombok.RequiredArgsConstructor;
 public class PassengerController {
 
     private final PassengerService passengerService;
+
+    // Signup endpoint
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
+        try {
+            Passenger created = passengerService.signup(request);
+            // Do not return password
+            created.setPassword(null);
+            return ResponseEntity.ok(created);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // Global handler for IllegalArgumentException (optional, for cleaner error responses)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 
     @GetMapping
     public List<Passenger> findAll() {

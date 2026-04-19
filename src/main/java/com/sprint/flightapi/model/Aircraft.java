@@ -56,5 +56,6 @@ public class Aircraft {
         private Airline airline;
 
         @OneToMany(mappedBy = "aircraft")
+        @com.fasterxml.jackson.annotation.JsonIgnore
         private List<Flight> flights;
 }
