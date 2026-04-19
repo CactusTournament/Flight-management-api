@@ -1,22 +1,40 @@
 # Maven target directory
 /target/
 
+# Maven test output
+/target/surefire-reports/
+/target/test-classes/
+
 # Spring Boot logs
 *.log
 logs/
 spring.log
+
+# Docker
+.env
+docker-compose.override.yml
 
 # IntelliJ IDEA
 .idea/
 *.iml
 out/
 
+# Eclipse
+.classpath
+.project
+.settings/
+
 # VS Code
 .vscode/
+
 
 # OS files
 .DS_Store
 Thumbs.db
+
+# Mac system files
+.AppleDouble
+.LSOverride
 
 # Java
 *.class
@@ -24,14 +42,17 @@ Thumbs.db
 *.war
 *.ear
 
+
 # Environment / credentials
 application.properties
 application.yml
 *.env
 
+
 # Backup files
 *.bak
 *.tmp
+
 
 # Node (if ever used for tooling)
 node_modules/
