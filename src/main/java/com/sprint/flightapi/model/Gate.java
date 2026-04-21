@@ -10,7 +10,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Gate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +36,4 @@ public class Gate {
     @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "gate")
     private List<Flight> flights;
-
-    // Getters and setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getCode() { return code; }
-    public void setCode(String code) { this.code = code; }
-    public Airport getAirport() { return airport; }
-    public void setAirport(Airport airport) { this.airport = airport; }
-    public List<Flight> getFlights() { return flights; }
-    public void setFlights(List<Flight> flights) { this.flights = flights; }
 }

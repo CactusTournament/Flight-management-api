@@ -23,6 +23,17 @@ public class AirportController {
 
     private final AirportService airportService;
 
+    @GetMapping("/{id}/cascade-delete-preview")
+    public AirportService.CascadeDeletePreview cascadeDeletePreview(@PathVariable Long id) {
+        return airportService.cascadeDeletePreview(id);
+    }
+
+    // Compatibility endpoint for frontend expecting /airports/{id}/cascade-preview
+    @GetMapping("/{id}/cascade-preview")
+    public AirportService.CascadeDeletePreview cascadePreviewAlias(@PathVariable Long id) {
+        return airportService.cascadeDeletePreview(id);
+    }
+
     @GetMapping
     public List<Airport> findAll() {
         return airportService.findAll();

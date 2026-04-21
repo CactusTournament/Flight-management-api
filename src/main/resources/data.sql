@@ -11,18 +11,21 @@ INSERT INTO airport (id, name, code, city_id) VALUES
 (3, 'Vancouver International', 'YVR', 2),
 (4, 'Montreal Trudeau International', 'YUL', 3);
 
--- Passengers
--- BCrypt hash for 'password': $2a$10$7EqJtq98hPqEX7fNZaFWoO5rG6WzQ4b6h0D4bFgh0QW8QW8QW8QW8
-INSERT INTO passenger (id, first_name, last_name, phone_number, city_id, username, password, role) VALUES
-(1, 'Brandon', 'Smith', '555-1111', 1, 'brandon', '$2a$12$C0rKdPHRWavn0swxCwblc.Qc2vZOLOL0Rycdb.fcWP1GrcJo2taIC', 'ADMIN'),
-(2, 'Alice', 'Johnson', '555-2222', 2, 'alice', '$2a$12$C0rKdPHRWavn0swxCwblc.Qc2vZOLOL0Rycdb.fcWP1GrcJo2taIC', 'USER'),
-(3, 'David', 'Lee', '555-3333', 3, 'david', '$2a$12$C0rKdPHRWavn0swxCwblc.Qc2vZOLOL0Rycdb.fcWP1GrcJo2taIC', 'USER');
+INSERT INTO passenger (id, first_name, last_name, country, email, phone_number, username, password, role) VALUES
+(1, 'Brandon', 'Smith', 'Canada', 'brandon@example.com', '555-1111', 'brandon', '$2a$12$C0rKdPHRWavn0swxCwblc.Qc2vZOLOL0Rycdb.fcWP1GrcJo2taIC', 'ADMIN'),
+(2, 'Alice', 'Johnson', 'Canada', 'alice@example.com', '555-2222', 'alice', '$2a$12$C0rKdPHRWavn0swxCwblc.Qc2vZOLOL0Rycdb.fcWP1GrcJo2taIC', 'USER'),
+(3, 'David', 'Lee', 'Canada', 'david@example.com', '555-3333', 'david', '$2a$12$C0rKdPHRWavn0swxCwblc.Qc2vZOLOL0Rycdb.fcWP1GrcJo2taIC', 'USER');
+
+-- Airlines
+INSERT INTO airline (id, name) VALUES
+(1, 'Air Canada'),
+(2, 'WestJet');
 
 -- Aircraft
-INSERT INTO aircraft (id, type, airline_name, number_of_passengers) VALUES
-(1, 'Boeing 737', 'Air Canada', 180),
-(2, 'Airbus A320', 'WestJet', 160),
-(3, 'Boeing 777', 'Air Canada', 396);
+INSERT INTO aircraft (id, type, airline_id, number_of_passengers) VALUES
+(1, 'Boeing 737', 1, 180),
+(2, 'Airbus A320', 2, 160),
+(3, 'Boeing 777', 1, 396);
 
 INSERT INTO aircraft_passenger (aircraft_id, passenger_id) VALUES
 (1, 1),
@@ -39,10 +42,6 @@ INSERT INTO aircraft_airport (aircraft_id, airport_id) VALUES
 (3, 3),
 (3, 4);
 
--- Airlines
-INSERT INTO airline (id, name) VALUES
-(1, 'Air Canada'),
-(2, 'WestJet');
 
 -- Gates
 INSERT INTO gate (id, code, airport_id) VALUES

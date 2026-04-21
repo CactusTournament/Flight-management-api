@@ -22,6 +22,17 @@ import lombok.RequiredArgsConstructor;
 public class GateController {
     private final GateService gateService;
 
+    @GetMapping("/{id}/cascade-delete-preview")
+    public GateService.CascadeDeletePreview cascadeDeletePreview(@PathVariable Long id) {
+        return gateService.cascadeDeletePreview(id);
+    }
+
+    // Compatibility endpoint for frontend expecting /gates/{id}/cascade-preview
+    @GetMapping("/{id}/cascade-preview")
+    public GateService.CascadeDeletePreview cascadePreviewAlias(@PathVariable Long id) {
+        return gateService.cascadeDeletePreview(id);
+    }
+
     @GetMapping
     public List<Gate> findAll() {
         return gateService.findAll();

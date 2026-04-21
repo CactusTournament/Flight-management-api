@@ -28,6 +28,17 @@ public class PassengerController {
 
     private final PassengerService passengerService;
 
+    @GetMapping("/{id}/cascade-delete-preview")
+    public PassengerService.CascadeDeletePreview cascadeDeletePreview(@PathVariable Long id) {
+        return passengerService.cascadeDeletePreview(id);
+    }
+
+    // Compatibility endpoint for frontend expecting /passengers/{id}/cascade-preview
+    @GetMapping("/{id}/cascade-preview")
+    public PassengerService.CascadeDeletePreview cascadePreviewAlias(@PathVariable Long id) {
+        return passengerService.cascadeDeletePreview(id);
+    }
+
     // Signup endpoint
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {

@@ -22,6 +22,11 @@ import lombok.RequiredArgsConstructor;
 public class AirlineController {
     private final AirlineService airlineService;
 
+    @GetMapping("/{id}/cascade-delete-preview")
+    public AirlineService.CascadeDeletePreview cascadeDeletePreview(@PathVariable Long id) {
+        return airlineService.cascadeDeletePreview(id);
+    }
+
     @GetMapping
     public List<Airline> findAll() {
         return airlineService.findAll();

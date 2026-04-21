@@ -24,6 +24,17 @@ public class AircraftController {
 
     private final AircraftService aircraftService;
 
+    @GetMapping("/{id}/cascade-delete-preview")
+    public AircraftService.CascadeDeletePreview cascadeDeletePreview(@PathVariable Long id) {
+        return aircraftService.cascadeDeletePreview(id);
+    }
+
+    // Compatibility endpoint for frontend expecting /aircraft/{id}/cascade-preview
+    @GetMapping("/{id}/cascade-preview")
+    public AircraftService.CascadeDeletePreview cascadePreviewAlias(@PathVariable Long id) {
+        return aircraftService.cascadeDeletePreview(id);
+    }
+
     @GetMapping
     public List<Aircraft> findAll() {
         return aircraftService.findAll();

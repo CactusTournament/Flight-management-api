@@ -1,4 +1,3 @@
-
 # Flight Management API
 
 A full-stack project for Semester 4 Final Sprint. This Spring Boot REST API manages cities, airports, passengers, aircraft, airlines, and gates, and is designed to meet all assignment requirements:
@@ -16,6 +15,8 @@ A full-stack project for Semester 4 Final Sprint. This Spring Boot REST API mana
 - [x] **CI/CD with GitHub Actions**
 - [x] **Docker & Docker Compose support**
 - [x] **Clean code, documentation, and CORS config**
+- [x] **Manual test scenarios/user stories documented**
+- [x] **Team collaboration, PR workflow, and project board**
 
 ---
 
@@ -24,26 +25,40 @@ A full-stack project for Semester 4 Final Sprint. This Spring Boot REST API mana
 ### ✅ Core Features Implemented
 - **Full CRUD** for Aircraft, Airport, Passenger, Flight, Airline, Gate, City
 - **Entity Relationships**: All major relationships (one-to-many, many-to-many) are modeled and working
-- **Authentication**: All API endpoints are protected with secure username/password authentication (Spring Security)
+- **Authentication**: All API endpoints are protected with secure username/password authentication (Spring Security). Signup is public; all other endpoints require login.
 - **Validation**: Robust validation for all DTOs and entities; clear error messages for invalid input
 - **CORS**: Configured for safe frontend/backend integration
 - **Seed Data**: Loads initial data at startup for easy testing
 
 ### ✅ Testing & Quality
-- **Comprehensive Unit Tests**: All backend logic is covered by passing unit tests (Maven: `./mvnw clean test`)
+- **Comprehensive Unit & Integration Tests**: All backend logic is covered by passing unit and integration tests (Maven: `./mvnw clean test`).
+- **Test Coverage**: All entities and relationships are tested for CRUD and delete-cascade logic. See `EntityDeleteIntegrationTests` and controller/service tests.
 - **CI/CD**: GitHub Actions workflow runs build and tests on every push/PR to `main` using a real MySQL service
 - **Docker Support**: API and MySQL can be run together with Docker Compose; standalone Docker run supported
 
 ### ✅ Clean Code & Documentation
 - **Object-Oriented Design**: Follows clean code and OOP best practices
 - **Codebase Structure**: Clear separation of controller, service, repository, and model layers
-- **README**: Updated with setup, usage, and endpoint documentation
+- **README**: Updated with setup, usage, endpoint documentation, and user stories
 
-### ⬜️ Next Steps
-- Document frontend manual test scenarios (user stories)
-- Final code/documentation polish
-- Deploy backend, DB, and frontend to AWS
-- Prepare and submit final documentation and demo video
+### ✅ Deployment
+- **PR Workflow**: All changes via PRs, with reviews and trunk-based branching
+- **Project Board**: https://trello.com/invite/b/69de58a1c2d6034d35ecdd8d/ATTI4d4af2b9f708c712bb04daaae6fd7343CF9AC032/sdat-devops-sprint used for planning and tracking
+- **Frontend Repo**: [Frontend Repository]https://github.com/CactusTournament/Flight-management-frontend
+
+---
+
+## User Stories & Manual Test Scenarios
+
+- As a user, I can sign up for an account with a username, password, email, phone number, and country.
+- As a user, I can log in and access all API endpoints after authentication.
+- As an admin, I can add, update, or delete flights, aircraft, airports, airlines, gates, and cities.
+- As a user, I can view arrivals and departures for any airport.
+- As a user, I can view, update, or delete my passenger profile.
+- As an admin, I can assign aircraft to airports and flights to gates.
+- As a user, I can see all relationships (e.g., which flights are at which gates, which aircraft are at which airports).
+- As a user, I cannot access protected endpoints without logging in (401 Unauthorized).
+- As a user, I receive clear error messages for invalid input or failed authentication.
 
 ---
 
@@ -91,7 +106,7 @@ Returns all flights where airport 3 is the destination.
 |---------------|-------------------------------------------------|
 | **City**      | id, name, state, population |
 | **Airport**   | id, name, code, city_id |
-| **Passenger** | id, firstName, lastName, phoneNumber, city_id |
+| **Passenger** | id, firstName, lastName, phoneNumber, email, username, country, city_id (optional) |
 | **Aircraft**  | id, type, numberOfPassengers, airline_id |
 | **Airline**   | id, name |
 | **Gate**      | id, code, airport_id |
@@ -114,7 +129,7 @@ Returns all flights where airport 3 is the destination.
 - Aircraft → many Passengers (many-to-many)
 - Aircraft → many Airports (many-to-many)
 - Aircraft → many Flights
-- Passenger → one City
+- Passenger → one City (optional)
 - Passenger → many Aircraft (many-to-many)
 - Passenger → many Flights (many-to-many)
 - Flight → one Aircraft
@@ -176,7 +191,6 @@ docker run -p 8080:8080 \
 	flight-api
 ```
 
-
 > The default `application.properties` is set for local dev. Docker Compose overrides DB connection for containers.
 
 ## Project Structure
@@ -192,11 +206,14 @@ src/main/java/com/sprint/flightapi/
 
 ## Testing
 
-Postman collection included. Test endpoints:
-- `GET /cities/{id}` – Retrieve city
-- `GET /passengers/{id}/aircraft` – Passenger flights
-- `POST /cities` – Create city
-- `PUT /cities/{id}` – Update city
-- `DELETE /cities/{id}` – Delete city
+- All controller and service logic is covered by unit and integration tests (see `/src/test/java`).
+- `EntityDeleteIntegrationTests` ensures cascade-safe deletes for all entities.
+- Run all tests with:
+  ```bash
+  ./mvnw clean test
+  ```
+- Postman collection included for manual API testing.
+
+---
 
 Author: Brandon Maloney & SD14

@@ -22,6 +22,17 @@ import lombok.RequiredArgsConstructor;
 public class FlightController {
     private final FlightService flightService;
 
+    @GetMapping("/{id}/cascade-delete-preview")
+    public FlightService.CascadeDeletePreview cascadeDeletePreview(@PathVariable Long id) {
+        return flightService.cascadeDeletePreview(id);
+    }
+
+    // Compatibility endpoint for frontend expecting /flights/{id}/cascade-preview
+    @GetMapping("/{id}/cascade-preview")
+    public FlightService.CascadeDeletePreview cascadePreviewAlias(@PathVariable Long id) {
+        return flightService.cascadeDeletePreview(id);
+    }
+
 
     @GetMapping
     public List<Flight> findAll() {
