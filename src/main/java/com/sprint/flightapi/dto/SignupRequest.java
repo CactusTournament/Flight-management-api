@@ -11,4 +11,6 @@ public class SignupRequest {
     private String password;
     private String confirmPassword;
     private String phoneNumber;
+    private Long cityId;
+    private String country;
 }

@@ -33,12 +33,7 @@ public class Aircraft {
     private String airlineName;
     private Integer numberOfPassengers;
 
-    @ManyToMany
-    @JoinTable(
-            name = "aircraft_passenger",
-            joinColumns = @JoinColumn(name = "aircraft_id"),
-            inverseJoinColumns = @JoinColumn(name = "passenger_id")
-    )
+    @ManyToMany(mappedBy = "aircraft")
     @JsonIgnore
     private List<Passenger> passengers;
 

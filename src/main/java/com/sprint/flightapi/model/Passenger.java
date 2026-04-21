@@ -37,14 +37,15 @@ public class Passenger {
     private String password;
     private String role; // e.g., USER or ADMIN
 
+    private String country;
+
     @ManyToOne
     @JoinColumn(name = "city_id")
-    @JsonIgnore
     private City city;
 
         @ManyToMany
         @JoinTable(
-            name = "passenger_aircraft",
+            name = "aircraft_passenger",
             joinColumns = @JoinColumn(name = "passenger_id"),
             inverseJoinColumns = @JoinColumn(name = "aircraft_id")
         )
