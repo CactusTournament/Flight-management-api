@@ -24,6 +24,17 @@ public class CityController {
 
     private final CityService cityService;
 
+    @GetMapping("/{id}/cascade-delete-preview")
+    public CityService.CascadeDeletePreview cascadeDeletePreview(@PathVariable Long id) {
+        return cityService.cascadeDeletePreview(id);
+    }
+
+    // Compatibility endpoint for frontend expecting /cities/{id}/cascade-preview
+    @GetMapping("/{id}/cascade-preview")
+    public CityService.CascadeDeletePreview cascadePreviewAlias(@PathVariable Long id) {
+        return cityService.cascadeDeletePreview(id);
+    }
+
     @GetMapping
     public List<City> findAll() {
         return cityService.findAll();
