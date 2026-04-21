@@ -22,7 +22,6 @@ public class PassengerUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Passenger passenger = passengerRepository.findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-        System.out.println("[DEBUG] Loaded user: " + passenger.getUsername() + ", hash: " + passenger.getPassword());
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + passenger.getRole());
         return new org.springframework.security.core.userdetails.User(
             passenger.getUsername(),
