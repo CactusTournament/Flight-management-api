@@ -13,6 +13,7 @@ spring.log
 # Docker
 .env
 docker-compose.override.yml
+docker-compose.yml
 
 # IntelliJ IDEA
 .idea/
