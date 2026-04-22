@@ -33,7 +33,6 @@ public class Airport {
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    @JsonIgnore
     private City city;
 
     @ManyToMany(mappedBy = "airports")
